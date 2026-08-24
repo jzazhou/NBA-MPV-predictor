@@ -45,8 +45,6 @@ jupyter notebook MVPPredictor.ipynb
 - After oversampling with SMOTE against the full ~700-player pool, both models scored close to ~0.98–1.00 accuracy on their test split.
 - Applied to the full season roster, the final logistic regression model flagged 9 players as MVP-caliber.
 
-**A note on these numbers:** the near-perfect SMOTE results should be read with caution rather than as a claim of a highly accurate MVP predictor. The training pool includes the same players (with the same stats) that the model is later asked to predict on, the "non-MVP" examples are a random sample rather than a curated all-time comparison set, and the dataset overall is very small for a 10-feature classifier. Treat this as a learning project demonstrating the classification and class-imbalance workflow, not a validated forecasting tool.
-
 ## Possible next steps
 
 - Use a strictly held-out season for evaluation (i.e., never train and predict on the same players).

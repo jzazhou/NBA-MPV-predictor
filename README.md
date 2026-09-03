@@ -6,7 +6,7 @@ A machine learning project that predicts NBA Most Valuable Player (MVP) candidat
 
 1. **Label the training data.** Every MVP winner from 2001–2022 (`NBAMVPdataset.csv`) is labeled `Yes`. A random sample of players from a full season's stats (`NBAPlayerStatsRegular.csv`) is labeled `No`.
 2. **Features.** Each player is represented by 10 box-score stats: games played (`G`), minutes played (`MP`), points (`PTS`), rebounds (`TRB`), assists (`AST`), steals (`STL`), blocks (`BLK`), field goal % (`FG%`), 3-point % (`3P%`), and free throw % (`FT%`).
-3. **Handle class imbalance.** Because MVP winners are rare compared to the full player pool, the notebook tries two approaches: downsampling the non-MVP class to match the 22 MVP examples, and, in a second pass, oversampling the minority (MVP) class with [SMOTE](https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html) against the full ~700-player pool.
+3. **Handle class imbalance.** Because MVP winners are rare compared to the full player pool, two approaches are implemented: downsampling the non-MVP class to match the 22 MVP examples, and, in a second pass, oversampling the minority (MVP) class with [SMOTE](https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html) against the full ~700-player pool.
 4. **Train and evaluate.** Both a `DecisionTreeClassifier` and a `LogisticRegression` model (scikit-learn) are trained and scored with a classification report and confusion matrix.
 5. **Predict.** The trained model is applied to the full `NBAPlayerStatsRegular.csv` roster to flag which players it classifies as MVP-caliber based on their stat line.
 6. **Visualize.** A few exploratory plots (scatter, bar, box plots) chart relationships like age vs. games played and the spread of shooting percentages across the league.
@@ -44,10 +44,3 @@ jupyter notebook MVPPredictor.ipynb
 - On the small, manually downsampled dataset (22 MVP + 22 non-MVP examples), the decision tree scored ~0.89 accuracy and logistic regression ~0.86 accuracy on the held-out test split.
 - After oversampling with SMOTE against the full ~700-player pool, both models scored close to ~0.98–1.00 accuracy on their test split.
 - Applied to the full season roster, the final logistic regression model flagged 9 players as MVP-caliber.
-
-## Possible next steps
-
-- Use a strictly held-out season for evaluation (i.e., never train and predict on the same players).
-- Add advanced metrics (PER, win shares, VORP, team win %) rather than raw box-score counting stats, since MVP voting weighs team success heavily.
-- Cross-validate instead of a single train/test split, given how small the labeled dataset is.
-- Compare additional models (random forest, gradient boosting) alongside the decision tree and logistic regression baselines.
